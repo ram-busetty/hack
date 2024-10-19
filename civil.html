@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course and Teacher Selection</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: orange;
+            color: #333;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px yellow;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #007bff;
+        }
+
+        label {
+            display: block;
+            margin-top: 10px;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        select, input[type="submit"] {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 15px;
+            background-color: #f8f9fa;
+        }
+
+        select:hover, input[type="submit"]:hover {
+            border-color: #007bff;
+        }
+
+        .subject-list {
+            margin-top: 20px;
+        }
+
+        .subject {
+            padding: 15px;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            margin-bottom: 20px;
+            border-radius: 5px;
+        }
+
+        .submit-btn {
+            background-color: #28a745;
+            color: white;
+            font-size: 17px;
+            cursor: pointer;
+            border-radius: 5px;
+            padding: 12px;
+            transition: background-color 0.3s;
+        }
+
+        .submit-btn:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Course and Teacher Selection</h1>
+
+    <!-- Year and Semester Selection -->
+    <label for="year">Select Year:</label>
+    <select id="year" onchange="displaySubjects()">
+        <option value="">-- Select Year --</option>
+        <option value="1">1st Year</option>
+        <option value="2">2nd Year</option>
+        <option value="3">3rd Year</option>
+        <option value="4">4th Year</option>
+    </select>
+
+    <label for="semester">Select Semester:</label>
+    <select id="semester" onchange="displaySubjects()">
+        <option value="">-- Select Semester --</option>
+        <option value="1">1st Semester</option>
+        <option value="2">2nd Semester</option>
+    </select>
+
+    <!-- Subjects and Teacher Selection -->
+    <div class="subject-list" id="subject-list"></div>
+
+    <!-- Submit Button -->
+    <input type="submit" class="submit-btn" value="Submit Selection" onclick="submitSelection()">
+</div>
+
+<script>
+    // Courses and Teachers (sample data)
+    const courses = {
+        "1-1": {
+            theory: ["Engineering Mechanics", "Engineering Mathematics", "Engineering Physics", "Surveying I", "Basic Civil Engineering"],
+            labs: ["Engineering Workshop", "Surveying Lab"]
+        },
+        "1-2": {
+            theory: ["Building Materials", "Engineering Geology", "Mathematics II", "Surveying II", "Fluid Mechanics"],
+            labs: ["Geology Lab", "Fluid Mechanics Lab"]
+        },
+        "2-1": {
+            theory: ["Strength of Materials", "Structural Analysis I", "Geotechnical Engineering", "Concrete Technology", "Water Resources Engineering"],
+            labs: ["Strength of Materials Lab", "Concrete Technology Lab"]
+        },
+        "2-2": {
+            theory: ["Design of Concrete Structures", "Transportation Engineering", "Environmental Engineering I", "Hydrology", "Soil Mechanics"],
+            labs: ["Concrete Structures Lab", "Soil Mechanics Lab"]
+        },
+        "3-1": {
+            theory: ["Steel Structures", "Foundation Engineering", "Structural Analysis II", "Environmental Engineering II", "Irrigation Engineering"],
+            labs: ["Steel Structures Lab", "Environmental Engineering Lab"]
+        },
+        "3-2": {
+            theory: ["Advanced Structural Design", "Construction Management", "Highway Engineering", "Water Treatment", "Open Elective"],
+            labs: ["Structural Design Lab", "Highway Engineering Lab"]
+        },
+        "4-1": {
+            theory: ["Advanced Concrete Technology", "Earthquake Engineering", "Project Management", "Finite Element Method", "Elective"],
+            labs: ["Concrete Technology Lab", "Earthquake Engineering Lab"]            
+        },
+        "4-2": {
+            theory: ["Final Year Project / Thesis", "Sustainable Construction", "Soft Skills", "Emerging Technologies", "Elective"],
+            labs: ["Project Lab", "Sustainable Construction Lab"]            
+        }
+    };
+
+    const teachers = ["Naveen", "Prof. Sunil", "Dr. Ayyavaraih", "Harinath", "Ravikanth"];
+
+    // Display subjects based on year and semester selection
+    function displaySubjects() {
+        const year = document.getElementById('year').value;
+        const semester = document.getElementById('semester').value;
+        const key = year + '-' + semester;
+
+        if (courses[key]) {
+            let subjectHtml = '<h3>Theory Courses:</h3>';
+            // Display theory subjects
+            courses[key].theory.forEach((subject, index) => {
+                subjectHtml += `
+                    <div class="subject">
+                        <label>${subject}</label>
+                        <select id="teacher-theory-${index}">
+                            <option value="">-- Select Teacher --</option>
+                            ${teachers.map(teacher => `<option value="${teacher}">${teacher}</option>`).join('')}
+                        </select>
+                    </div>`;
+            });
+
+            // Display lab subjects
+            subjectHtml += '<h3>Lab Courses:</h3>';
+            courses[key].labs.forEach((subject, index) => {
+                subjectHtml += `
+                    <div class="subject">
+                        <label>${subject}</label>
+                        <select id="teacher-lab-${index}">
+                            <option value="">-- Select Teacher --</option>
+                            ${teachers.map(teacher => `<option value="${teacher}">${teacher}</option>`).join('')}
+                        </select>
+                    </div>`;
+            });
+
+            document.getElementById('subject-list').innerHTML = subjectHtml;
+        } else {
+            document.getElementById('subject-list').innerHTML = '';
+        }
+    }
+
+    // Submit the course selection
+    function submitSelection() {
+        const year = document.getElementById('year').value;
+        const semester = document.getElementById('semester').value;
+        const key = year + '-' + semester;
+        const selectedCourses = courses[key];
+        let selectedTeachers = {};
+
+        if (selectedCourses) {
+            selectedCourses.theory.forEach((subject, index) => {
+                const teacher = document.getElementById(`teacher-theory-${index}`).value;
+                if (teacher) {
+                    selectedTeachers[subject] = teacher;
+                }
+            });
+
+            selectedCourses.labs.forEach((subject, index) => {
+                const teacher = document.getElementById(`teacher-lab-${index}`).value;
+                if (teacher) {
+                    selectedTeachers[subject] = teacher;
+                }
+            });
+
+            if (Object.keys(selectedTeachers).length === selectedCourses.theory.length + selectedCourses.labs.length) {
+                alert('Selection submitted successfully!');
+                console.log({
+                    year: year,
+                    semester: semester,
+                    selections: selectedTeachers
+                });
+                // Perform further actions such as sending the data to the server
+            } else {
+                alert('Please select teachers for all theory and lab courses!');
+            }
+        } else {
+            alert('Please select a valid year and semester.');
+        }
+    }
+</script>
+
+</body>
+</html>

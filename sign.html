@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .signup-container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            width: 350px;
+        }
+
+        .signup-container h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .signup-container input[type="text"],
+        .signup-container input[type="email"],
+        .signup-container input[type="password"] {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        .signup-container input[type="submit"] {
+            width: 100%;
+            padding: 12px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .signup-container input[type="submit"]:hover {
+            background-color: #218838;
+        }
+
+        .signup-container p {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .signup-container a {
+            text-decoration: none;
+            color: #007bff;
+        }
+
+        .signup-container a:hover {
+            text-decoration: underline;
+        }
+    </style>
+    <script>
+        function newPage()
+        {
+            window.location.href="homePage.html";
+        }
+    </script>
+</head>
+<body>
+
+    <div class="signup-container">
+        <h2>Create an Account</h2>
+        <form action="/register" method="post">
+            <label for="fullname">Full Name</label>
+            <input type="text" id="fullname" name="fullname" placeholder="Enter your full name" required>
+
+            <label for="email">Email Address</label>
+            <input type="email" id="email" name="email" placeholder="Enter your email" required>
+
+            <label for="username">Username</label>
+            <input type="text" id="username" name="username" placeholder="Choose a username" required>
+
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" placeholder="Create a password" required>
+
+            <label for="confirm_password">Confirm Password</label>
+            <input type="password" id="confirm_password" name="confirm_password" placeholder="Confirm your password" required>
+
+            <input type="button" value="Sign In"onclick="newPage()">
+        </form>
+        <p>Already have an account? <a href="login.html">Sign In</a></p>
+    </div>
+
+</body>
+</html>

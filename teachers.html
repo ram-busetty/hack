@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teacher Profiles</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: tomato;
+            background-image:url('https://www.miltonoxfordshire.co.uk/wp-content/uploads/2019/09/Oxford-University-Walking-Tour.jpg')
+        }
+        
+        .container {
+            width: 80%;
+            margin: 20px auto;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            background-color: #fff;
+            padding: 10px;
+            margin: 5px 0;
+            cursor: pointer;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px yellow ;
+        }
+
+        li:hover {
+            background-color: #e0e0e0;
+        }
+
+        .profile {
+            display: none;
+            background-color: #fff;
+            padding: 15px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+        }
+
+        .profile h2 {
+            margin-top: 0;
+        }
+
+        .close-btn {
+            color: #ff0000;
+            cursor: pointer;
+            float: right;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Teachers</h1>
+    <ul>
+        <li onclick="showProfile('teacher1')">Naveen</li>
+        <li onclick="showProfile('teacher2')">Prof. Sunil</li>
+        <li onclick="showProfile('teacher3')">Dr. Ayyavariah</li>
+        <li onclick="showProfile('teacher4')">Harinath </li>
+        <li onclick="showProfile('teacher5')">Ravikanth</li>
+    </ul>
+
+    <!-- Teacher Profiles -->
+    <div id="teacher1" class="profile">
+        <span class="close-btn" onclick="hideProfile('teacher1')">X</span>
+        <h2>Naveen</h2>
+        <p><strong>Rating:</strong> 4.5/5</p>
+        <p><strong>Research Projects:</strong> Quantum Computing, Artificial Intelligence</p>
+        <p><strong>Patents:</strong> 5</p>
+        <p><strong>Academic Background:</strong> Ph.D. in Computer Science from MIT</p>
+    </div>
+
+    <div id="teacher2" class="profile">
+        <span class="close-btn" onclick="hideProfile('teacher2')">X</span>
+        <h2>Prof. Sunil</h2>
+        <p><strong>Rating:</strong> 4.8/5</p>
+        <p><strong>Research Projects:</strong> Data Science, Machine Learning</p>
+        <p><strong>Patents:</strong> 3</p>
+        <p><strong>Academic Background:</strong> Ph.D. in Data Science from Stanford University</p>
+    </div>
+
+    <div id="teacher3" class="profile">
+        <span class="close-btn" onclick="hideProfile('teacher3')">X</span>
+        <h2>Dr. Ayyavaraih</h2>
+        <p><strong>Rating:</strong> 4.6/5</p>
+        <p><strong>Research Projects:</strong> Cybersecurity, Blockchain</p>
+        <p><strong>Patents:</strong> 2</p>
+        <p><strong>Academic Background:</strong> Ph.D. in Cybersecurity from Harvard University</p>
+    </div>
+    <div id="teacher4" class="profile">
+        <span class="close-btn" onclick="hideProfile('teacher3')">X</span>
+        <h2>Harinath</h2>
+        <p><strong>Rating:</strong> 4.8/5</p>
+        <p><strong>Research Projects:</strong> Artificial Intelligence, Blockchain</p>
+        <p><strong>Patents:</strong> 2</p>
+        <p><strong>Academic Background:</strong> Ph.D. in Cybersecurity from Harvard University</p>
+    </div>
+    <div id="teacher5" class="profile">
+        <span class="close-btn" onclick="hideProfile('teacher3')">X</span>
+        <h2>Ravikanth</h2>
+        <p><strong>Rating:</strong> 4.9/5</p>
+        <p><strong>Research Projects:</strong> Machine Learning, Blockchain</p>
+        <p><strong>Patents:</strong> 2</p>
+        <p><strong>Academic Background:</strong> Ph.D. in Cybersecurity from Harvard University</p>
+    </div>
+</div>
+
+<script>
+    function showProfile(id) {
+        var profile = document.getElementById(id);
+        var profiles = document.getElementsByClassName('profile');
+
+        // Hide all profiles
+        for (var i = 0; i < profiles.length; i++) {
+            profiles[i].style.display = 'none';
+        }
+
+        // Show selected profile
+        profile.style.display = 'block';
+    }
+
+    function hideProfile(id) {
+        var profile = document.getElementById(id);
+        profile.style.display = 'none';
+    }
+</script>
+
+</body>
+</html>
